@@ -1,0 +1,18 @@
+{
+    "lang": "dansk",
+
+    "dateFormat": "DD-MM-YYYY HH:mm",
+    "details": "detaljer",
+    "download": "download",
+    "empty": "tom",
+    "files": "filer",
+    "filter": "filter",
+    "folders": "mapper",
+    "grid": "grid",
+    "icons": "ikoner",
+    "lastModified": "Sidst ændret",
+    "name": "Navn",
+    "noMatch": "ingen match",
+    "parentDirectory": "Overordnet mappe",
+    "size": "Størrelse"
+}

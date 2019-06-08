@@ -1,0 +1,18 @@
+{
+    "lang": "português",
+
+    "dateFormat": "DD-MM-YYYY HH:mm",
+    "details": "detalhes",
+    "download": "descarregar",
+    "empty": "vazio",
+    "files": "arquivos",
+    "filter": "filtro",
+    "folders": "pastas",
+    "grid": "grelha",
+    "icons": "ícones",
+    "lastModified": "última modificação",
+    "name": "Nome",
+    "noMatch": "sem resultados",
+    "parentDirectory": "diretório acima",
+    "size": "Tamanho"
+}

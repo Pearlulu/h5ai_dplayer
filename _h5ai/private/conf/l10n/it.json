@@ -1,0 +1,18 @@
+{
+    "lang": "italiano",
+
+    "dateFormat": "DD-MM-YYYY HH:mm",
+    "details": "dettagli",
+    "download": "download",
+    "empty": "vuota",
+    "files": "file",
+    "filter": "filtra",
+    "folders": "cartelle",
+    "grid": "griglia",
+    "icons": "icone",
+    "lastModified": "Ultima modifica",
+    "name": "Nome",
+    "noMatch": "nessun risultato",
+    "parentDirectory": "Cartella Superiore",
+    "size": "Dimensione"
+}
