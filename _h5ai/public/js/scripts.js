@@ -3888,7 +3888,6 @@ function(e) {
 			return new Promise(function(t) {
 
 				var fileurl = e.absHref;
-				console.log(fileurl);
 				var filepath = fileurl.slice(0,fileurl.lastIndexOf('/'));
 				var filename = fileurl.slice(fileurl.lastIndexOf('/')+1);
 				var filenotype = fileurl.slice(fileurl.lastIndexOf('/')+1,fileurl.lastIndexOf('.'));
