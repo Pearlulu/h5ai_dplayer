@@ -9,7 +9,7 @@ function hlsfile(){
 		m3u8dir="${file%/*}/__${filename}__"
 		if [[ ! -d "${m3u8dir}" && ! -f "${file}.aria2" ]]; then
 			mkdir -p "${m3u8dir}"
-			ffmpeg -i "${file}" -c copy -bsf:v h264_mp4toannexb -hls_time 6 -hls_list_size 0 -hls_segment_filename "${m3u8dir}/%04d.eot" "${m3u8dir}/video.m3u8" >> /data/cloud/hls.log 2>&1
+			ffmpeg -i "${file}" -c copy -bsf:v h264_mp4toannexb -hls_time 6 -hls_list_size 0 -hls_segment_filename "${m3u8dir}/%04d.ts" "${m3u8dir}/video.m3u8" > /dev/null 2>&1
 			# echo 'Rikka' > "${file}"
 		fi
 	fi
