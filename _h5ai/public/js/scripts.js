@@ -3890,8 +3890,9 @@ function(e) {
 				var fileurl = e.absHref;
 				console.log(fileurl);
 				var filepath = fileurl.slice(0,fileurl.lastIndexOf('/'));
+				var filename = fileurl.slice(fileurl.lastIndexOf('/')+1);
 				var filenotype = fileurl.slice(fileurl.lastIndexOf('/')+1,fileurl.lastIndexOf('.'));
-				var m3u8 = filepath+'/__'+filenotype+'__/video.m3u8';
+				var m3u8 = filepath+'/__'+filename+'__/video.m3u8';
 				var sub = filepath+'/'+filenotype+'.vtt';
 
 				function loadXMLDoc() {
