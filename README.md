@@ -3,9 +3,8 @@
 如果不想要用户名密码，把_h5ai/public/index.php里第二行include 'login.php'注销。
 修改用户名密码在_h5ai/public/login.php。
 
-2.考虑到方便手动管理视频切片文件，会自动按照下面的目录结构播放video.m3u8，如果没有切片则会播放原始视频。
+2. 考虑到方便手动管理视频切片文件，会自动按照下面的目录结构播放video.m3u8，如果没有切片则会播放原始视频。
 切片文件夹和文件默认都是隐藏的，不会在h5ai中显示，可以手动修改_h5ai/private/conf/options.json配置是否隐藏。
-m3u8 tree
 ```
 ├── __abcd.mp4__
 │   └── video.m3u8
