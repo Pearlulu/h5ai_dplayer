@@ -3549,6 +3549,9 @@ function(e) {
 				e.stopPropagation(), e.preventDefault()
 			},
 			z = function(e) {
+				if (document.querySelector("#dplayer")) {
+					return;
+				}
 				var t = e.keyCode;
 				27 === t ? (P(e), $()) : 8 === t || 37 === t ? (P(e), M()) : 13 === t || 32 === t || 39 === t ? (P(e), E()) : 70 === t && (P(e), D())
 			},
@@ -3900,9 +3903,9 @@ function(e) {
 				        if (xmlhttp.readyState == 4) {
 				            if (xmlhttp.status == 200) {
 				                loadPlayer(m3u8);
-				                console.log('m3u8 yes');
+				                console.log('play m3u8');
 				            } else if (xmlhttp.status == 404) {
-				                console.log('m3u8 no');
+				                console.log('play normal');
 				                loadPlayer(fileurl);
 				            } else {
 				                console.log('other');
