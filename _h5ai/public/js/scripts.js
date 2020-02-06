@@ -3559,10 +3559,9 @@ function(e) {
 				A([]), a("#pv-container").clr(), a("#pv-overlay").show(), a(p).on("keydown", z), _()
 			},
 			$ = function() {
-				var dpvideo = document.querySelector(".dplayer video");
-				if (dpvideo){
-				    dpvideo.src = "";
-				    dpvideo.load();
+				if (window.dplayer){
+					window.dplayer.destroy();
+					window.dplayer=null;
 				}
 				A([]), a("#pv-container").clr(), a("#pv-overlay").hide(), a(p).off("keydown", z)
 			},
@@ -3591,10 +3590,9 @@ function(e) {
 				var n = this.item;
 				Promise.resolve().then(function() {
 					i(a("#pv-container *"), function(e) {
-						var dpvideo = document.querySelector(".dplayer video");
-						if (dpvideo){
-						    dpvideo.src = "";
-						    dpvideo.load();
+						if (window.dplayer){
+							window.dplayer.destroy();
+							window.dplayer=null;
 						}
 						"function" == typeof e.unload && e.unload()
 					}), a("#pv-container").hide().clr(), H(!0, n.thumbSquare || n.icon, 200)
@@ -3894,21 +3892,20 @@ function(e) {
 				var filepath = fileurl.slice(0,fileurl.lastIndexOf('/'));
 				var filename = fileurl.slice(fileurl.lastIndexOf('/')+1);
 				var filenotype = fileurl.slice(fileurl.lastIndexOf('/')+1,fileurl.lastIndexOf('.'));
-				var m3u8 = filepath+'/__'+filename+'__/video.m3u8';
-				var sub = filepath+'/'+filenotype+'.vtt';
+				var filetype = fileurl.slice(fileurl.lastIndexOf('.')+1);
+				var filem3u8 = filepath+'/__'+filename+'__/video.m3u8';
+				var filesub = filepath+'/'+filenotype+'.vtt';
 
-				function loadXMLDoc() {
+				function checkhls(m3u8,videourl,islive=false) {
 				    var xmlhttp = new XMLHttpRequest();
 				    xmlhttp.onreadystatechange = function() {
 				        if (xmlhttp.readyState == 4) {
 				            if (xmlhttp.status == 200) {
-				                loadPlayer(m3u8);
-				                console.log('play m3u8');
-				            } else if (xmlhttp.status == 404) {
-				                console.log('play normal');
-				                loadPlayer(fileurl);
+								console.log('play m3u8');
+				                newPlayer(m3u8,islive);
 				            } else {
-				                console.log('other');
+								console.log('play file');
+								newPlayer(videourl,islive);
 				            }
 				        }
 				    }
@@ -3916,33 +3913,45 @@ function(e) {
 				    xmlhttp.send();
 				}
 
-				function loadPlayer(url) {
-				    document.querySelector("#pv-container").classList.remove('hidden');
+				function showPlayer(){
+					document.querySelector("#pv-container").classList.remove('hidden');
 				    document.querySelector("#pv-spinner").style.display = 'none';
 				    var dp = document.createElement('div');
 				    dp.id = 'dplayer';
 				    dp.style.cssText = 'width:100%;height:100%';
-				    document.querySelector("#pv-container").appendChild(dp);
-				    
-				    var dplayer = new DPlayer({
-				        container: document.querySelector("#dplayer"),
-				        autoplay: true,
-				        mutex: true,
-				        video: {
-				            url: url,
-				            type: 'auto'
-				        },
-				        subtitle: {
-				            url: sub,
-				            type: 'webvtt'
-				        }
-				    });
-				    
-				    a.setLabels([a.item.label],'','');
+					document.querySelector("#pv-container").appendChild(dp);
 				}
 
-				loadXMLDoc();
+				function newPlayer(videourl,islive=false,videotype='auto'){
+					showPlayer();
+					window.dplayer = new DPlayer({
+						container: document.querySelector("#dplayer"),
+						live: islive,
+						autoplay: true,
+						mutex: true,
+						video: {
+							url: videourl,
+							type: videotype,
+						},
+						subtitle: {
+							url: filesub,
+							type: 'webvtt'
+						},
+					});
 
+					a.setLabels([a.item.label],'','');
+				}
+
+				if(fileurl.slice(-9) == '.live.flv'){
+					console.log('live true');
+					var liveurl = location.origin+'/live/'+filename.replace('.live.flv','.flv');
+					var livem3u8 = location.origin+'/live/'+filename.replace('.live.flv','.m3u8');
+					checkhls(livem3u8,liveurl,true);
+				} else {
+					console.log('live false');
+					checkhls(filem3u8,fileurl);
+				}
+				
 				/*var n = i(c).on("loadedmetadata", function() {
 					return t(n)
 				}).attr("controls", "controls");
